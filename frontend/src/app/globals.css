@@ -1,0 +1,10 @@
+@import "tailwindcss"; 
+/* @tailwind preflight; */
+/* @tailwind utilities; */
+
+
+
+.masonry-column {
+  background-clip: padding-box;
+}
+
