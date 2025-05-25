@@ -10,6 +10,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "clsx": "^2.1.1",
     "framer-motion": "^12.11.0",
     "i18next": "^25.0.2",
     "lucide-react": "^0.506.0",
@@ -21,6 +22,7 @@
     "react-dom": "^19.0.0",
     "react-i18next": "^15.5.1",
     "react-masonry-css": "^1.0.16",
+    "tailwind-merge": "^3.3.0",
     "yet-another-react-lightbox": "^3.23.1"
   },
   "devDependencies": {
