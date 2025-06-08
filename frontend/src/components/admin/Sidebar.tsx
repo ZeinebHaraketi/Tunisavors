@@ -27,29 +27,6 @@ const Sidebar = () => {
   const [user, setUser] = useState<User | null>(null);
   const [openMenus, setOpenMenus] = useState<Record<string, boolean>>({});
 
-  useEffect(() => {
-    const fetchUser = async () => {
-      const token = localStorage.getItem("accessToken");
-      if (!token) return;
-
-      try {
-        const res = await fetch("http://localhost:5002/api/users/me", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-
-        if (!res.ok) return;
-
-        const data = await res.json();
-        setUser(data.user);
-      } catch (error) {
-        console.error("Erreur lors de la récupération de l'utilisateur", error);
-      }
-    };
-
-    fetchUser();
-  }, []);
 
   const toggleMenu = (text: string) => {
     setOpenMenus((prev) => ({ ...prev, [text]: !prev[text] }));

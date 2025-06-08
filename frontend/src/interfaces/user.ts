@@ -13,9 +13,13 @@ export interface User {
   accessToken?: string;
   isVerified?: boolean;
 
-  dateNaissance?: string; // ou Date
+  dateNaissance?: Date; // ou Date
   localisation?: string;
+  langue?: string,
   nationalite?: string;
+  photoProfil?:  string;
+  preferencesCulinaires?: string[];
+
 
   createdAt?: string; // ou Date
   lastLogin?: string; // ou Date

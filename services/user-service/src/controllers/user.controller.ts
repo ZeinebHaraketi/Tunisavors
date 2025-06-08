@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { updateUserProfile, getUserById } from "../services/user.service";
+import { updateUserProfile, getUserById, updateUserProfilePhoto, uploadImage } from "../services/user.service";
 import { imagekit } from "../utils/imagekit";
 import { User } from "../models/User";
 
@@ -50,6 +50,98 @@ export const getToken = async (req: Request, res: Response): Promise<void> => {
   res.json({ accessToken: user.accessToken });
   return; // optionnel
 }
+
+
+
+
+
+
+export async function updateProfilePhoto(req: Request, res: Response): Promise<void> {
+  try {
+    if (!req.file) {
+      res.status(400).json({ message: 'Image manquante.' });
+      return;
+    }
+
+    const userId = req.params.id;
+    const fileBuffer = req.file.buffer;
+    const originalName = req.file.originalname;
+    const mimeType = req.file.mimetype;
+
+    const imageUrl = await uploadImage(fileBuffer, originalName, mimeType);
+    await updateUserProfilePhoto(userId, imageUrl);
+
+    res.status(200).json({ message: 'Photo de profil mise à jour.', photoProfil: imageUrl });
+  } catch (error) {
+    console.error('Erreur updateProfilePhoto:', error);
+    res.status(500).json({ message: 'Erreur serveur.' });
+  }
+}
+
+
+
+
+
+//Update Profile User =====> TRUE
+import { getCountryCode } from '../utils/countries';
+
+
+export const updateProfileUser = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const userId = req.params.id;
+    if (!userId) {
+      res.status(401).json({ message: 'Unauthorized' });
+      return;
+    }
+
+    const {
+      nom,
+      prenom,
+      dateNaissance,
+      localisation,
+      nationalite,
+      langue,
+      bio,
+      preferencesCulinaires,
+    } = req.body;
+
+    const updateData: any = {
+      nom,
+      prenom,
+      dateNaissance,
+      localisation,
+      langue,
+      bio,
+      preferencesCulinaires,
+    };
+
+    if (nationalite) {
+      // Utilise la fonction pour transformer "Tunisia" en "tn"
+      updateData.nationalite = getCountryCode(nationalite);
+    }
+
+    Object.keys(updateData).forEach(key => {
+      if (updateData[key] === undefined) {
+        delete updateData[key];
+      }
+    });
+
+    const updatedUser = await updateUserProfile(userId, updateData);
+
+    if (!updatedUser) {
+      res.status(404).json({ message: 'User not found' });
+      return;
+    }
+
+    res.status(200).json(updatedUser);
+  } catch (error) {
+    console.error('Error updateProfileUser:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+
+
+
 
 
 

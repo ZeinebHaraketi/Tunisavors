@@ -10,7 +10,6 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
       <Sidebar />
       <div className="flex flex-col flex-1">
         <Topbar />
-        <DashboardCards />
         <main className="flex-1 p-6 bg-gray-50">{children}</main>
       </div>
     </div>

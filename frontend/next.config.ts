@@ -13,7 +13,7 @@ const nextConfig: NextConfig = {
   // },
 
   images: {
-    domains: ['localhost'], // For remote images
+    domains: ['localhost', 'ik.imagekit.io',], // For remote images
     remotePatterns: [
       {
         protocol: 'http',

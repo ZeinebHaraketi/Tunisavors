@@ -10,7 +10,7 @@ const DashboardCards = () => {
       <Card className="bg-orangebrule text-blue-700	 shadow-md">
         <CardContent className="p-6 flex flex-col gap-4">
           <div className="flex items-center justify-between">
-            <h3 className="text-md font-semibold">Touristes</h3>
+            <h3 className="text-md font-semibold">Tourists</h3>
             <Users size={24} />
           </div>
           <p className="text-3xl font-bold">128</p>
@@ -21,7 +21,7 @@ const DashboardCards = () => {
       <Card className="bg-vertolive text-blue-700 shadow-md">
         <CardContent className="p-6 flex flex-col gap-4">
           <div className="flex items-center justify-between">
-            <h3 className="text-md font-semibold">Locaux</h3>
+            <h3 className="text-md font-semibold">Hosts</h3>
             <UserPlus size={24} />
           </div>
           <p className="text-3xl font-bold">45</p>
@@ -32,7 +32,7 @@ const DashboardCards = () => {
       <Card className="bg-rougebrique text-blue-700 shadow-md">
         <CardContent className="p-6 flex flex-col gap-4">
           <div className="flex items-center justify-between">
-            <h3 className="text-md font-semibold">Réservations</h3>
+            <h3 className="text-md font-semibold">Reservations</h3>
             <CalendarCheck size={24} />
           </div>
           <p className="text-3xl font-bold">92</p>
@@ -43,7 +43,7 @@ const DashboardCards = () => {
       <Card className="bg-beigesable text-blue-700 shadow-md">
         <CardContent className="p-6 flex flex-col gap-4">
           <div className="flex items-center justify-between">
-            <h3 className="text-md font-semibold">Revenus</h3>
+            <h3 className="text-md font-semibold">Income</h3>
             <Wallet size={24} />
           </div>
           <p className="text-3xl font-bold">1 540 DT</p>

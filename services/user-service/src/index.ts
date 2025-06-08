@@ -3,7 +3,7 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import { connectDB } from './utils/db';
 import path from "path";
-import userRoutes from './routes/user.route';
+import userRoutes from './routes/userRoutes';
 
 
 // Configuration initiale
@@ -21,7 +21,11 @@ const publicDir = path.resolve(__dirname, '../public'); // Chemin ABSOLU
 app.use('/static', express.static(publicDir)); 
 
 // Middlewares
-app.use(cors());
+// app.use(cors());
+app.use(cors({
+  origin: 'http://localhost:3000', // URL frontend Next.js
+  credentials: true,
+}));
 app.use(express.json());
 
 // Connexion à la base de données
@@ -30,6 +34,9 @@ connectDB();
 // Routes
 app.use('/api/users', userRoutes);
 
+app.get('/api/test', (req, res) => {
+  res.json({ message: 'Serveur OK' });
+});
 
 // Gestion des erreurs
 app.use((err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {

@@ -1,11 +1,11 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { getInitials } from "@/lib/utils";
+import { User } from "@/interfaces/user";
 
-type User = {
-  name: string;
-  email: string;
-};
+
 
 const Topbar = () => {
   const [user, setUser] = useState<User | null>(null);
@@ -35,18 +35,20 @@ const Topbar = () => {
   }, []);
 
   return (
-    <header className="w-full flex items-center justify-between px-6 py-4 bg-red-800 text-red-800 shadow">
+    <header className="w-full flex items-center justify-between px-6 py-4 bg-red-700 text-white shadow">
       <div>
         <h2 className="text-xl font-bold">
-          {user?.name || "Bienvenue"}
+          {user?.nom || "Welcome"}
         </h2>
-        <p className="text-sm text-white/80">
-          Accédez à votre espace d’administration
-        </p>
+        
       </div>
 
-      <div className="flex items-center gap-3 bg-white text-red-800 px-4 py-2 rounded-full shadow">
-        <p className="text-sm font-medium">{user?.email || "admin@tunisavors.com"}</p>
+      <div className="flex items-center gap-3 bg-white text-red-700 px-2 py-2 rounded-full shadow">
+        {/* <p className="text-sm font-medium">{user?.email || "admin@tunisavors.com"}</p> */}
+        <Avatar className="w-8 h-8">
+          <AvatarImage src={user?.photoProfil} alt={user?.nom} />
+          <AvatarFallback>{getInitials(user?.nom || "A")}</AvatarFallback>
+        </Avatar>
       </div>
     </header>
   );

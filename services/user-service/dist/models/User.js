@@ -25,6 +25,7 @@ const UserSchema = new mongoose_1.Schema({
     bio: { type: String },
     photoProfil: { type: String },
     preferencesCulinaires: [{ type: String }],
+    langue: { type: String }, // Ville/région
     historique: [{
             type: {
                 type: String, // 'atelier', 'réservation', etc.
