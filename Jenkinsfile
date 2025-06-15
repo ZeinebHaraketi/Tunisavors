@@ -14,20 +14,20 @@ pipeline {
 
     stage('Build Docker Images') {
       steps {
-        sh 'docker compose build'
+        bat 'docker compose build'
       }
     }
 
     stage('Run Services') {
       steps {
-        sh 'docker compose up -d'
+        bat 'docker compose up -d'
       }
     }
 
     stage('Tests') {
       steps {
-        sh 'docker exec auth-service npm test'
-        sh 'docker exec user-service npm test'
+        bat 'docker exec auth-service npm test'
+        bat 'docker exec user-service npm test'
       }
     }
   }
