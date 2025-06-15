@@ -12,6 +12,18 @@ pipeline {
       }
     }
 
+    stage('Vérifier Structure') {
+            steps {
+                bat '''
+                echo "Structure des fichiers:"
+                tree /F
+                echo "Contenu des dossiers:"
+                dir services/auth-service { ls }
+                dir services/user-service { ls }
+                dir frontend { ls }
+                '''
+            }
+
     stage('Build Docker Images') {
       steps {
         bat 'docker compose build'
