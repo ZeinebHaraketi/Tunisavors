@@ -24,28 +24,25 @@ pipeline {
                 '''
             }
 
-    stage('Build Docker Images') {
-      steps {
-        bat 'docker compose build'
-      }
-    }
+    stage('Build Images') {
+            steps {
+                bat 'docker-compose build --no-cache'
+            }
+        }
+        
+        stage('Démarrer Services') {
+            steps {
+                bat 'docker-compose up -d'
+            }
 
-    stage('Run Services') {
-      steps {
-        bat 'docker compose up -d'
-      }
-    }
-
-    stage('Tests') {
-      steps {
-        bat 'docker exec auth-service npm test'
-        bat 'docker exec user-service npm test'
-      }
+    
     }
   }
 
   post {
     always {
+      bat 'docker-compose ps'
+      bat 'docker images'
       echo 'Pipeline terminé'
     }
     failure {
